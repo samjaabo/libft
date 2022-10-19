@@ -6,7 +6,7 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:33:21 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/19 12:16:33 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:56:04 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,31 @@ static void rm_duplication(char *s, char c, char fill)
 		*p = '\0';
 }
 
+static int	my_split(char **ar, char *s, int n)
+{
+	char	*tmp;
+	char	**array;
+
+	array = ar;
+	if (*s != '\0')
+	{
+		tmp = ft_strdup(s);
+		if (!tmp)
+			return (0);
+		*array++ = tmp;
+	}
+	while (n--)
+	{
+		s = ft_strchr(s, '\0');
+		tmp = ft_strdup(++s);
+		if (!tmp)
+			return (0);
+		*array++ = tmp;
+	}
+	*array = NULL;
+	return (1);
+}
+
 static int	ft_count(char *str, char c)
 {
 	int	n;
@@ -51,13 +76,9 @@ static int	ft_count(char *str, char c)
 char	**ft_split(char const *str, char c)
 {
 	char	**array;
-	char	**ar;
 	char	*alloc;
-	char	*s;
-	char	*tmp;
 	int		n;
 	
-	s = (char *)str;
 	alloc = ft_strdup(str);
 	if (!alloc)
 		return (NULL);
@@ -70,24 +91,8 @@ char	**ft_split(char const *str, char c)
 	*array = NULL;
 	if (*str == '\0' && c == '\0')
 		return (array);
-	ar = array;
-	s = alloc;
-	if (*s != '\0')
-	{
-		tmp = ft_strdup(s);
-		if (!tmp)
-			return (NULL);
-		*array++ = tmp;
-	}
-	while (n--)
-	{
-		s = ft_strchr(s, '\0');
-		tmp = ft_strdup(++s);
-		if (!tmp)
-			return (NULL);
-		*array++ = tmp;
-	}
-	*array = NULL;
+	if (my_split(array, alloc, n) == 0)
+		return (NULL);
 	free(alloc);
-	return (ar);
+	return (array);
 }
