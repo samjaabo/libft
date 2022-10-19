@@ -6,27 +6,44 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:33:21 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/18 12:38:34 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:16:33 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void	ft_move(char *str, char c)
+#include <stdio.h>
+static void rm_duplication(char *s, char c, char fill)
 {
-	while (*str == c && *str)
-		++str;
+	char	*p;
+
+	p = s;
+	while (*s)
+	{
+		if (*s == c)
+		{
+			*p++ = fill;
+			++s;
+			while (*s == c)
+				++s;
+		}
+		else
+			*p++ = *s++;
+	}
+	*p = '\0';
+	if (p != s && *--p == c)
+		*p = '\0';
 }
 
 static int	ft_count(char *str, char c)
 {
-	int		n;
+	int	n;
 
 	n = 0;
-	while (*str != c && *str)
+	while (*str)
 	{
+		if (*str == c)
+			++n;
 		++str;
-		++n;
 	}
 	return (n);
 }
@@ -37,35 +54,40 @@ char	**ft_split(char const *str, char c)
 	char	**ar;
 	char	*alloc;
 	char	*s;
+	char	*tmp;
 	int		n;
-	int		count;
-
-	count = 0;
+	
 	s = (char *)str;
-	while (*s)
-	{
-		ft_move(s, c);
-		n = ft_count(s, c);
-		if (n != 0 || *s != '\0')
-			count++;
-	}
-	array = (char **)malloc((count + 1) * sizeof(char **));
-	ar = array;
+	alloc = ft_strdup(str);
+	if (!alloc)
+		return (NULL);
+	rm_duplication(alloc, c, c);
+	n = ft_count(alloc, c);
+	rm_duplication(alloc, c, '\0');
+	array = (char **)malloc((n + 1) * sizeof(char **));
 	if (!array)
 		return (NULL);
-	s = (char *)str;
-	while (*s)
+	*array = NULL;
+	if (*str == '\0' && c == '\0')
+		return (array);
+	ar = array;
+	s = alloc;
+	if (*s != '\0')
 	{
-		ft_move(s, c);
-		n = ft_count(s, c);
-		if (n == 0 || *s == '\0')
-			continue ;
-		alloc = (char *)malloc(n + 1);
-		if (!alloc)
+		tmp = ft_strdup(s);
+		if (!tmp)
 			return (NULL);
-		(void)ft_strlcpy(alloc, s, n + 1);
-		*array++ = alloc;
+		*array++ = tmp;
+	}
+	while (n--)
+	{
+		s = ft_strchr(s, '\0');
+		tmp = ft_strdup(++s);
+		if (!tmp)
+			return (NULL);
+		*array++ = tmp;
 	}
 	*array = NULL;
+	free(alloc);
 	return (ar);
 }

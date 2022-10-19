@@ -6,7 +6,7 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:37:37 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/18 13:03:45 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/19 09:12:15 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char				*ft_strdup(const char *str);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strjoin(char const *s1, char const *s2);
 unsigned int		ft_strlcat(char *dest, const char *src, unsigned int size);
-unsigned int		ft_strlcpy(char *dest, const char *src, unsigned int dsz);
+unsigned int		ft_strlcpy(char *dest, const char *src, unsigned int dest_len);
 size_t				ft_strlen(const char *str);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strncmp(const char *s11, const char *s22, size_t n);

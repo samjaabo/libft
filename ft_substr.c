@@ -6,7 +6,7 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:33:55 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/18 10:46:34 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/19 09:07:40 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char	*ft_substr(char const *str, size_t start, size_t end)
 	if (!alloc)
 		return (NULL);
 	strc = strc + start;
-	(void)strlcpy(alloc, strc, end + 1);
+	(void)ft_strlcpy(alloc, strc, end + 1);
 	return (alloc);
 }
