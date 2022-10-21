@@ -6,7 +6,7 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:48:02 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/16 16:17:46 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:46:22 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	unsigned char *d;
-	unsigned char *s;
+	unsigned char	*d;
+	unsigned char	*s;
 
 	if (!dest && !src)
 		return (NULL);

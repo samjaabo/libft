@@ -6,7 +6,7 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:33:48 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/18 11:08:18 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:07:32 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *str, const char *remove)
 	char	*alloc;
 	size_t	n;
 
+	if (!str)
+		return (NULL);
 	start = (char *)str;
 	end = (char *)str;
 	end = ft_strchr(str, '\0');

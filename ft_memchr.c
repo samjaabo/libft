@@ -6,7 +6,7 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:20:19 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/16 16:18:57 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/20 10:44:58 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memchr(const void *s, int c, size_t len)
 {
-	unsigned char *by;
-	unsigned char chr;
+	unsigned char	*by;
+	unsigned char	chr;
 
 	by = (unsigned char *)s;
 	chr = (unsigned char)c;

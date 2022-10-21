@@ -6,17 +6,32 @@
 /*   By: samjaabo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 17:33:21 by samjaabo          #+#    #+#             */
-/*   Updated: 2022/10/19 12:56:04 by samjaabo         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:55:59 by samjaabo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-static void rm_duplication(char *s, char c, char fill)
+
+static int	ft_clean_array(char **start, char **end, char *alloc_free)
+{
+	char	**tmp;
+
+	tmp = start;
+	while (start != end)
+		free(*start++);
+	free(tmp);
+	free(alloc_free);
+	return (0);
+}
+
+static void	rm_duplication(char *s, char c, char fill)
 {
 	char	*p;
 
 	p = s;
+	while (*s == c)
+		s++;
 	while (*s)
 	{
 		if (*s == c)
@@ -34,25 +49,24 @@ static void rm_duplication(char *s, char c, char fill)
 		*p = '\0';
 }
 
-static int	my_split(char **ar, char *s, int n)
+int	my_split(char **ar, char *s, int n)
 {
 	char	*tmp;
+	char	*alloc_free;
 	char	**array;
 
 	array = ar;
-	if (*s != '\0')
-	{
-		tmp = ft_strdup(s);
-		if (!tmp)
-			return (0);
-		*array++ = tmp;
-	}
-	while (n--)
+	alloc_free = s;
+	tmp = ft_strdup(s);
+	if (!tmp)
+		return (ft_clean_array(ar, ar, alloc_free));
+	*array++ = tmp;
+	while (--n)
 	{
 		s = ft_strchr(s, '\0');
 		tmp = ft_strdup(++s);
 		if (!tmp)
-			return (0);
+			return (ft_clean_array(ar, array, alloc_free));
 		*array++ = tmp;
 	}
 	*array = NULL;
@@ -63,7 +77,7 @@ static int	ft_count(char *str, char c)
 {
 	int	n;
 
-	n = 0;
+	n = 1;
 	while (*str)
 	{
 		if (*str == c)
@@ -78,7 +92,9 @@ char	**ft_split(char const *str, char c)
 	char	**array;
 	char	*alloc;
 	int		n;
-	
+
+	if (!str)
+		return (NULL);
 	alloc = ft_strdup(str);
 	if (!alloc)
 		return (NULL);
